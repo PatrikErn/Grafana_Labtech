@@ -1,40 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_LABTECH",
-      "label": "labtech",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "mysql",
-      "pluginName": "MySQL"
-    }
-  ],
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "4.5.2"
-    },
-    {
-      "type": "datasource",
-      "id": "mysql",
-      "name": "MySQL",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "singlestat",
-      "name": "Singlestat",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "table",
-      "name": "Table",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": []
   },
@@ -42,17 +6,17 @@
   "gnetId": null,
   "graphTooltip": 0,
   "hideControls": false,
-  "id": null,
+  "id": 1,
   "links": [],
   "refresh": false,
   "rows": [
     {
-      "collapse": true,
+      "collapse": false,
       "height": 283,
       "panels": [
         {
           "columns": [],
-          "datasource": "${DS_LABTECH}",
+          "datasource": "labtech",
           "description": "Senaste kontakten med LTagent Service",
           "fontSize": "150%",
           "id": 3,
@@ -64,7 +28,7 @@
             "col": 2,
             "desc": true
           },
-          "span": 4,
+          "span": 5,
           "styles": [
             {
               "alias": "Last Heartbeat",
@@ -103,9 +67,9 @@
               "alias": "Value",
               "colorMode": "row",
               "colors": [
-                "rgba(50, 172, 45, 0.97)",
+                "rgba(245, 54, 54, 0.9)",
                 "rgba(237, 129, 40, 0.89)",
-                "rgba(245, 54, 54, 0.9)"
+                "rgba(50, 172, 45, 0.97)"
               ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
               "decimals": 2,
@@ -129,6 +93,7 @@
             {
               "alias": "",
               "format": "table",
+              "hide": false,
               "rawSql": "SELECT NAME,lastcontact, IdleTime 'Ignore' FROM computers WHERE computers.`LastContact` < DATE_ADD(NOW(),INTERVAL - 300 SECOND) AND (computers.os LIKE '%server%')",
               "refId": "B"
             }
@@ -140,7 +105,7 @@
         },
         {
           "columns": [],
-          "datasource": "${DS_LABTECH}",
+          "datasource": "labtech",
           "description": "Blå = Informational\nGul = Warning\nRöd = Error",
           "fontSize": "150%",
           "height": "",
@@ -154,10 +119,10 @@
             "col": 0,
             "desc": true
           },
-          "span": 8,
+          "span": 7,
           "styles": [
             {
-              "alias": "Message",
+              "alias": "Varning",
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
               "pattern": "VALUE",
               "type": "string"
@@ -189,10 +154,11 @@
                 "rgba(237, 129, 40, 0.89)",
                 "rgba(50, 172, 45, 0.97)"
               ],
+              "dateFormat": "MMMM D, YYYY LT",
               "decimals": 2,
-              "pattern": "/.*/",
+              "pattern": "Datum",
               "thresholds": [],
-              "type": "number",
+              "type": "date",
               "unit": "short"
             }
           ],
@@ -200,29 +166,8 @@
             {
               "alias": "",
               "format": "table",
-              "hide": true,
-              "rawSql": "SELECT count(*) as 'Warnings' FROM labtech.alerts WHERE Severity = '2' ",
-              "refId": "B"
-            },
-            {
-              "alias": "",
-              "format": "table",
-              "hide": true,
-              "rawSql": "SELECT count(*) as 'Informational' FROM labtech.alerts WHERE Severity = '1' ",
-              "refId": "C"
-            },
-            {
-              "alias": "",
-              "format": "table",
-              "hide": true,
-              "rawSql": "SELECT count(*) as 'Alert' FROM labtech.alerts WHERE Severity = '4' ",
-              "refId": "D"
-            },
-            {
-              "alias": "",
-              "format": "table",
               "hide": false,
-              "rawSql": "SELECT Severity, Source AS VALUE FROM `alerts`\r\nWHERE (Alerts.Severity=3  OR Alerts.Severity=2 OR Alerts.Severity=4 )\r\nORDER BY Alertdate DESC LIMIT 30",
+              "rawSql": "SELECT Severity, \r\nSource AS VALUE ,\r\nAlertdate as 'Datum'\r\nFROM `alerts`\r\nWHERE (Alerts.Severity=3  OR Alerts.Severity=2 OR Alerts.Severity=4 )\r\nORDER BY Alertdate DESC LIMIT 30",
               "refId": "A"
             }
           ],
@@ -236,17 +181,17 @@
       "repeatRowId": null,
       "showTitle": false,
       "title": "Alerts & Offline Agents",
-      "titleSize": "h3"
+      "titleSize": "h6"
     },
     {
-      "collapse": true,
-      "height": 170,
+      "collapse": false,
+      "height": 291,
       "panels": [
         {
           "columns": [],
-          "datasource": "${DS_LABTECH}",
+          "datasource": "labtech",
           "description": "Green = < 8 GB\nOrange = < 4 GB\nRed = < 2 GB",
-          "fontSize": "150%",
+          "fontSize": "130%",
           "id": 4,
           "links": [],
           "minSpan": 6,
@@ -254,7 +199,7 @@
           "scroll": false,
           "showHeader": true,
           "sort": {
-            "col": 5,
+            "col": 6,
             "desc": false
           },
           "span": 12,
@@ -358,14 +303,36 @@
               "thresholds": [],
               "type": "hidden",
               "unit": "short"
+            },
+            {
+              "alias": "Drive Letter",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "letter",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
             }
           ],
           "targets": [
             {
               "alias": "",
               "format": "table",
-              "rawSql": "SELECT \r\n   computers.computerid as `Computer Id`,\r\n   computers.name as `Computer Name`,\r\n   clients.name as `Client Name`,\r\n   computers.domain as `Computer Domain`,\r\n   computers.username as `Computer User`,\r\n   Drives.Free/1024 as `GB Free`,\r\n   CASE WHEN LEFT(Drives.SmartStatus, INSTR(Drives.SmartStatus, ':')-1) IN('CD', 'DVD') THEN 3 WHEN LEFT(Drives.SmartStatus, INSTR(Drives.SmartStatus, ':')-1) = 'USB' THEN 2 WHEN LEFT(Drives.SmartStatus, INSTR(Drives.SmartStatus, ':')-1) IN('IDE', 'SCSI') THEN 1 WHEN Drives.FileSystem IN('NTFS', 'FAT32', 'FAT', 'HFS', 'ext2', 'ext3', 'ext4', 'btrfs', 'jfs', 'xfs', 'reiser4', 'reiserfs') THEN IF(INSTR(LOWER(Drives.Model), 'usb')>0, 2, 1) ELSE 4 END as `Computer.Drives.Type`,\r\n   IF(INSTR(computers.os, 'server')>0, 1, 0) as `Computer.OS.IsServer`\r\nFROM Computers \r\nLEFT JOIN inv_operatingsystem ON (Computers.ComputerId=inv_operatingsystem.ComputerId)\r\nLEFT JOIN Clients ON (Computers.ClientId=Clients.ClientId)\r\nLEFT JOIN Locations ON (Computers.LocationId=Locations.LocationID)\r\nLEFT JOIN Drives ON (Drives.ComputerId=Computers.ComputerId)\r\n WHERE \r\n((((Drives.Free/1024 < 8) AND (CASE WHEN LEFT(Drives.SmartStatus, INSTR(Drives.SmartStatus, ':')-1) IN('CD', 'DVD') THEN 3 WHEN LEFT(Drives.SmartStatus, INSTR(Drives.SmartStatus, ':')-1) = 'USB' THEN 2 WHEN LEFT(Drives.SmartStatus, INSTR(Drives.SmartStatus, ':')-1) IN('IDE', 'SCSI') THEN 1 WHEN Drives.FileSystem IN('NTFS', 'FAT32', 'FAT', 'HFS', 'ext2', 'ext3', 'ext4', 'btrfs', 'jfs', 'xfs', 'reiser4', 'reiserfs') THEN IF(INSTR(LOWER(Drives.Model), 'usb')>0, 2, 1) ELSE 4 END = '1') AND (IF(INSTR(computers.os, 'server')>0, 1, 0)<>0))))\r\n",
+              "rawSql": "SELECT \r\n   computers.computerid as `Computer Id`,\r\n   computers.name as `Computer Name`,\r\n   clients.name as `Client Name`,\r\n   computers.domain as `Computer Domain`,\r\n   computers.username as `Computer User`,\r\n   drives.letter,\r\n   Drives.Free/1024 as `GB Free`,\r\n   \r\n   CASE WHEN LEFT(Drives.SmartStatus, INSTR(Drives.SmartStatus, ':')-1) IN('CD', 'DVD') THEN 3 WHEN LEFT(Drives.SmartStatus, INSTR(Drives.SmartStatus, ':')-1) = 'USB' THEN 2 WHEN LEFT(Drives.SmartStatus, INSTR(Drives.SmartStatus, ':')-1) IN('IDE', 'SCSI') THEN 1 WHEN Drives.FileSystem IN('NTFS', 'FAT32', 'FAT', 'HFS', 'ext2', 'ext3', 'ext4', 'btrfs', 'jfs', 'xfs', 'reiser4', 'reiserfs') THEN IF(INSTR(LOWER(Drives.Model), 'usb')>0, 2, 1) ELSE 4 END as `Computer.Drives.Type`,\r\n   IF(INSTR(computers.os, 'server')>0, 1, 0) as `Computer.OS.IsServer`\r\nFROM Computers \r\nLEFT JOIN inv_operatingsystem ON (Computers.ComputerId=inv_operatingsystem.ComputerId)\r\nLEFT JOIN Clients ON (Computers.ClientId=Clients.ClientId)\r\nLEFT JOIN Locations ON (Computers.LocationId=Locations.LocationID)\r\nLEFT JOIN Drives ON (Drives.ComputerId=Computers.ComputerId)\r\n WHERE \r\n((((Drives.Free/1024 < 8) AND (CASE WHEN LEFT(Drives.SmartStatus, INSTR(Drives.SmartStatus, ':')-1) IN('CD', 'DVD') THEN 3 WHEN LEFT(Drives.SmartStatus, INSTR(Drives.SmartStatus, ':')-1) = 'USB' THEN 2 WHEN LEFT(Drives.SmartStatus, INSTR(Drives.SmartStatus, ':')-1) IN('IDE', 'SCSI') THEN 1 WHEN Drives.FileSystem IN('NTFS', 'FAT32', 'FAT', 'HFS', 'ext2', 'ext3', 'ext4', 'btrfs', 'jfs', 'xfs', 'reiser4', 'reiserfs') THEN IF(INSTR(LOWER(Drives.Model), 'usb')>0, 2, 1) ELSE 4 END = '1') AND (IF(INSTR(computers.os, 'server')>0, 1, 0)<>0))))\r\n",
               "refId": "A"
+            },
+            {
+              "alias": "",
+              "format": "table",
+              "hide": true,
+              "rawSql": "SELECT SubGroupwchildren.computerid,SubGroupwchildren.GroupID,Mastergroups.Priority FROM SubGroupwchildren JOIN Mastergroups USING(groupid) WHERE  FIND_IN_SET(SubGroupwchildren.groupid,'9') AND SubGroupwchildren.ComputerID NOT IN (Select ComputerID from AgentIgnore Where AgentID=69556);Select DISTINCT 'C',computers.computerid,computers.Name as ComputerName,Convert(CONCAT(clients.name,' ',locations.name) Using utf8) As Location, drives.`Free` as TestValue,drives.letter FROM ((drives LEFT JOIN Computers ON Computers.ComputerID=drives.ComputerID) LEFT JOIN Locations ON Locations.LocationID=Computers.Locationid) LEFT JOIN Clients ON Clients.ClientID=Computers.clientid JOIN AgentComputerData on Computers.ComputerID=AgentComputerData.ComputerID WHERE drives.`Free` < (Drives.Size*.10) AND  (Drives.Size > 16384 and Drives.FileSystem not in ('CDFS','UNKFS','DVDFS','FAT','FAT32','NetFS')  and Drives.free < 8194",
+              "refId": "B"
             }
           ],
           "title": "Low HD",
@@ -379,248 +346,7 @@
       "repeatRowId": null,
       "showTitle": false,
       "title": "Hard Drive Alerts",
-      "titleSize": "h3"
-    },
-    {
-      "collapse": true,
-      "height": 132,
-      "panels": [
-        {
-          "cacheTimeout": null,
-          "colorBackground": true,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "datasource": "${DS_LABTECH}",
-          "format": "short",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": true,
-            "thresholdMarkers": true
-          },
-          "id": 10,
-          "interval": null,
-          "links": [],
-          "mappingType": 2,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "20%",
-          "prefix": "",
-          "prefixFontSize": "80%",
-          "rangeMaps": [],
-          "span": 3,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "COUNT(TicketID)",
-          "targets": [
-            {
-              "alias": "",
-              "format": "table",
-              "hide": false,
-              "rawSql": "SELECT COUNT(TicketID) FROM Tickets JOIN Clients USING(ClientID) WHERE STATUS=1 AND StartedDate > DATE_ADD(NOW(),INTERVAL -7 DAY)",
-              "refId": "A"
-            },
-            {
-              "alias": "",
-              "format": "table",
-              "hide": false,
-              "rawSql": "SELECT COUNT(TicketID) FROM Tickets JOIN Clients USING(ClientID) WHERE STATUS=4 AND StartedDate > DATE_ADD(NOW(),INTERVAL -30 DAY)",
-              "refId": "B"
-            }
-          ],
-          "thresholds": "5,8,100",
-          "title": "Nya Ärenden",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "avg"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": true,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "datasource": "${DS_LABTECH}",
-          "decimals": null,
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "",
-          "id": 12,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": " ",
-          "postfixFontSize": "80%",
-          "prefix": "",
-          "prefixFontSize": "80%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 3,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "Öppna",
-          "targets": [
-            {
-              "alias": "",
-              "format": "table",
-              "rawSql": "SELECT COUNT(TicketID) 'Öppna' FROM Tickets JOIN Clients USING(ClientID) WHERE STATUS=2 AND StartedDate > DATE_ADD(NOW(),INTERVAL -600 DAY)",
-              "refId": "A"
-            }
-          ],
-          "thresholds": "10,20,30",
-          "title": "Öppna Ärenden",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "avg"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(36, 123, 15, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "datasource": "${DS_LABTECH}",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 11,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "  Stängda",
-          "postfixFontSize": "80%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 6,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "Resolved",
-          "targets": [
-            {
-              "alias": "",
-              "format": "table",
-              "rawSql": "SELECT COUNT(TicketID) 'Resolved' FROM Tickets JOIN Clients USING(ClientID) WHERE STATUS=4 AND StartedDate > DATE_ADD(NOW(),INTERVAL -30 DAY)",
-              "refId": "A"
-            }
-          ],
-          "thresholds": "",
-          "title": "Stängda Ärenden (senaste 30 dgr)",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "avg"
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Tickets",
-      "titleSize": "h3"
+      "titleSize": "h6"
     }
   ],
   "schemaVersion": 14,
@@ -660,5 +386,5 @@
   },
   "timezone": "",
   "title": "Alerts",
-  "version": 82
+  "version": 99
 }
