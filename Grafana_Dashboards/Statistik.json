@@ -1,40 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_LABTECH",
-      "label": "labtech",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "mysql",
-      "pluginName": "MySQL"
-    }
-  ],
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "briangann-datatable-panel",
-      "name": "Datatable Panel",
-      "version": "0.0.3"
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "4.5.2"
-    },
-    {
-      "type": "datasource",
-      "id": "mysql",
-      "name": "MySQL",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "singlestat",
-      "name": "Singlestat",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": []
   },
@@ -42,13 +6,13 @@
   "gnetId": null,
   "graphTooltip": 0,
   "hideControls": false,
-  "id": null,
+  "id": 11,
   "links": [],
   "refresh": false,
   "rows": [
     {
-      "collapse": true,
-      "height": 260,
+      "collapse": false,
+      "height": 250,
       "panels": [
         {
           "cacheTimeout": null,
@@ -59,7 +23,7 @@
             "rgba(40, 199, 237, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_LABTECH}",
+          "datasource": null,
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -134,7 +98,7 @@
             "rgba(29, 103, 25, 0.89)",
             "rgba(38, 119, 35, 0.97)"
           ],
-          "datasource": "${DS_LABTECH}",
+          "datasource": "labtech",
           "decimals": null,
           "format": "none",
           "gauge": {
@@ -198,7 +162,7 @@
             "rgba(170, 48, 19, 0.89)",
             "rgba(246, 18, 16, 0.9)"
           ],
-          "datasource": "${DS_LABTECH}",
+          "datasource": "labtech",
           "format": "short",
           "gauge": {
             "maxValue": 200,
@@ -252,7 +216,7 @@
             }
           ],
           "thresholds": "0,190,200",
-          "title": "Obligo Automate Clients",
+          "title": "Obligo Automate Agents",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -266,14 +230,14 @@
         },
         {
           "cacheTimeout": null,
-          "colorBackground": false,
+          "colorBackground": true,
           "colorValue": false,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
-            "rgba(24, 166, 32, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
+            "rgba(17, 205, 191, 0.46)",
+            "rgba(51, 205, 180, 0.97)"
           ],
-          "datasource": "${DS_LABTECH}",
+          "datasource": null,
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -341,14 +305,14 @@
         },
         {
           "cacheTimeout": null,
-          "colorBackground": false,
+          "colorBackground": true,
           "colorValue": false,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
-            "rgba(29, 159, 12, 0.89)",
+            "rgba(141, 209, 133, 0.56)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_LABTECH}",
+          "datasource": null,
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -413,148 +377,250 @@
             }
           ],
           "valueName": "avg"
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "Agents and Software",
-      "titleSize": "h2"
-    },
-    {
-      "collapse": true,
-      "height": 285,
-      "panels": [
+        },
         {
-          "columns": [],
-          "compactRowsEnabled": true,
-          "datasource": "${DS_LABTECH}",
-          "datatablePagingType": "numbers",
-          "datatableTheme": "basic_theme",
-          "emptyData": false,
-          "fontSize": "150%",
-          "hoverEnabled": true,
-          "id": 9,
-          "infoEnabled": false,
-          "lengthChangeEnabled": true,
-          "links": [],
-          "orderColumnEnabled": true,
-          "pagingTypes": [
-            {
-              "text": "Page number buttons only",
-              "value": "numbers"
-            },
-            {
-              "text": "'Previous' and 'Next' buttons only",
-              "value": "simple"
-            },
-            {
-              "text": "'Previous' and 'Next' buttons, plus page numbers",
-              "value": "simple_numbers"
-            },
-            {
-              "text": "'First', 'Previous', 'Next' and 'Last' buttons",
-              "value": "full"
-            },
-            {
-              "text": "'First', 'Previous', 'Next' and 'Last' buttons, plus page numbers",
-              "value": "full_numbers"
-            },
-            {
-              "text": "'First' and 'Last' buttons, plus page numbers",
-              "value": "first_last_numbers"
-            }
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(196, 159, 11, 0.89)",
+            "rgba(70, 172, 45, 0.97)"
           ],
-          "panelHeight": 285,
-          "rowNumbersEnabled": false,
-          "rowsPerPage": 10,
-          "scroll": false,
-          "scrollHeight": "default",
-          "searchEnabled": false,
-          "showCellBorders": true,
-          "showHeader": true,
-          "showRowBorders": false,
-          "sort": {
-            "col": 0,
-            "desc": true
+          "datasource": null,
+          "decimals": null,
+          "format": "percent",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
           },
-          "span": 12,
-          "stripedRowsEnabled": true,
-          "styles": [
+          "id": 12,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
             {
-              "colorMode": "cell",
-              "colors": [
-                "rgba(39, 161, 216, 0.97)",
-                "rgb(40, 155, 237)",
-                "rgba(0, 77, 173, 0.9)"
-              ],
-              "decimals": 0,
-              "pattern": "Antal",
-              "thresholds": [
-                "5",
-                "15",
-                "100"
-              ],
-              "type": "number",
-              "unit": "short"
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
             }
           ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "Disk Health",
+          "prefixFontSize": "80%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 4,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "value",
           "targets": [
             {
               "alias": "",
               "format": "table",
-              "rawSql": "SELECT \r\n            clients.name AS 'Kund',\r\n       COUNT(computers.computerid) AS 'Antal'\r\nFROM computers\r\nLEFT OUTER JOIN clients ON clients.clientid=computers.clientid\r\nLEFT OUTER JOIN locations ON locations.locationid=computers.locationid\r\nGROUP BY clients.name",
+              "rawSql": "SELECT ROUND(AVG(TargetWeightedScore)) AS `value` FROM v_xr_sap_clienthealthchecks WHERE clientid=(1 OR 1=0) AND (Checkname LIKE 'Drive Fragmentation' OR Checkname LIKE 'Drive Stability' OR Checkname LIKE 'Drive Performance')",
               "refId": "A"
             }
           ],
-          "themeOptions": {
-            "dark": "./css/datatable-dark.css",
-            "light": "./css/datatable-light.css"
-          },
-          "themes": [
+          "thresholds": "50,75",
+          "title": "Average Disc Health",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
             {
-              "disabled": false,
-              "text": "Basic",
-              "value": "basic_theme"
-            },
-            {
-              "disabled": true,
-              "text": "Bootstrap",
-              "value": "bootstrap_theme"
-            },
-            {
-              "disabled": true,
-              "text": "Foundation",
-              "value": "foundation_theme"
-            },
-            {
-              "disabled": true,
-              "text": "ThemeRoller",
-              "value": "themeroller_theme"
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
             }
           ],
-          "title": "Agents / Customer",
-          "transform": "table",
-          "transparent": true,
-          "type": "briangann-datatable-panel"
+          "valueName": "avg"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(18, 169, 20, 0.97)"
+          ],
+          "datasource": null,
+          "decimals": null,
+          "format": "percent",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 13,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "80%",
+          "prefix": "Backup Health",
+          "prefixFontSize": "80%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 4,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "value",
+          "targets": [
+            {
+              "alias": "",
+              "format": "table",
+              "rawSql": "SELECT IFNULL(ROUND(SUM((SELECT COUNT(*) \r\nFROM v_xr_backup_jobs \r\nWHERE BackupJobStatus='Completed' AND BackupJobStartTime > DATE_ADD(NOW(),INTERVAL -30 DAY) \r\nAND clientid=(1 OR 1=0))/(SELECT COUNT(*) FROM v_xr_backup_jobs WHERE BackupJobStatus IN ('Completed','Failed') \r\nAND BackupJobStartTime > DATE_ADD(NOW(),INTERVAL -30 DAY) \r\nAND clientid=(1 OR 1=0)))*100,0),0) AS `value`",
+              "refId": "A"
+            }
+          ],
+          "thresholds": "95,100",
+          "title": "Panel Title",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "datasource": null,
+          "format": "percent",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 14,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "Patch Deployment",
+          "prefixFontSize": "80%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 4,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "value",
+          "targets": [
+            {
+              "alias": "",
+              "format": "table",
+              "rawSql": "SELECT ROUND((SUM(IF(hf.approved=2 AND hf.installed=1,1,0)))/SUM(IF(hf.approved=2,1,0))*100) AS `value` \r\nFROM Hotfix AS hf JOIN Computers AS c ON hf.Computerid = c.ComputerId \r\nWHERE (hf.Last_Date >= '0001-01-01 00:00:00') AND clientid=(1 OR 1=0)",
+              "refId": "A"
+            }
+          ],
+          "thresholds": "90,50",
+          "title": "Overall Patch Compliance",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
         }
       ],
       "repeat": null,
       "repeatIteration": null,
       "repeatRowId": null,
       "showTitle": false,
-      "title": "Computers",
-      "titleSize": "h2"
+      "title": "Agents and Software",
+      "titleSize": "h6"
     },
     {
-      "collapse": true,
+      "collapse": false,
       "height": 250,
       "panels": [
         {
           "columns": [],
           "compactRowsEnabled": false,
-          "datasource": "${DS_LABTECH}",
+          "datasource": null,
           "datatablePagingType": "simple_numbers",
           "datatableTheme": "basic_theme",
           "emptyData": false,
@@ -677,7 +743,7 @@
         {
           "columns": [],
           "compactRowsEnabled": false,
-          "datasource": "${DS_LABTECH}",
+          "datasource": null,
           "datatablePagingType": "simple_numbers",
           "datatableTheme": "basic_theme",
           "emptyData": false,
@@ -722,13 +788,13 @@
           "searchEnabled": false,
           "showCellBorders": false,
           "showHeader": true,
-          "showRowBorders": false,
+          "showRowBorders": true,
           "sort": {
             "col": 0,
             "desc": true
           },
           "span": 6,
-          "stripedRowsEnabled": false,
+          "stripedRowsEnabled": true,
           "styles": [
             {
               "colorMode": null,
@@ -803,6 +869,131 @@
       "repeatRowId": null,
       "showTitle": false,
       "title": "Agents / Customer",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": true,
+      "height": 285,
+      "panels": [
+        {
+          "columns": [],
+          "compactRowsEnabled": true,
+          "datasource": "labtech",
+          "datatablePagingType": "numbers",
+          "datatableTheme": "basic_theme",
+          "emptyData": false,
+          "fontSize": "150%",
+          "hoverEnabled": true,
+          "id": 9,
+          "infoEnabled": false,
+          "lengthChangeEnabled": true,
+          "links": [],
+          "orderColumnEnabled": true,
+          "pagingTypes": [
+            {
+              "text": "Page number buttons only",
+              "value": "numbers"
+            },
+            {
+              "text": "'Previous' and 'Next' buttons only",
+              "value": "simple"
+            },
+            {
+              "text": "'Previous' and 'Next' buttons, plus page numbers",
+              "value": "simple_numbers"
+            },
+            {
+              "text": "'First', 'Previous', 'Next' and 'Last' buttons",
+              "value": "full"
+            },
+            {
+              "text": "'First', 'Previous', 'Next' and 'Last' buttons, plus page numbers",
+              "value": "full_numbers"
+            },
+            {
+              "text": "'First' and 'Last' buttons, plus page numbers",
+              "value": "first_last_numbers"
+            }
+          ],
+          "panelHeight": 285,
+          "rowNumbersEnabled": false,
+          "rowsPerPage": 10,
+          "scroll": false,
+          "scrollHeight": "default",
+          "searchEnabled": false,
+          "showCellBorders": true,
+          "showHeader": true,
+          "showRowBorders": false,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "span": 12,
+          "stripedRowsEnabled": true,
+          "styles": [
+            {
+              "colorMode": "cell",
+              "colors": [
+                "rgba(39, 161, 216, 0.97)",
+                "rgb(40, 155, 237)",
+                "rgba(0, 77, 173, 0.9)"
+              ],
+              "decimals": 0,
+              "pattern": "Antal",
+              "thresholds": [
+                "5",
+                "15",
+                "100"
+              ],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "alias": "",
+              "format": "table",
+              "rawSql": "SELECT \r\n            clients.name AS 'Kund',\r\n       COUNT(computers.computerid) AS 'Antal'\r\nFROM computers\r\nLEFT OUTER JOIN clients ON clients.clientid=computers.clientid\r\nLEFT OUTER JOIN locations ON locations.locationid=computers.locationid\r\nGROUP BY clients.name",
+              "refId": "A"
+            }
+          ],
+          "themeOptions": {
+            "dark": "./css/datatable-dark.css",
+            "light": "./css/datatable-light.css"
+          },
+          "themes": [
+            {
+              "disabled": false,
+              "text": "Basic",
+              "value": "basic_theme"
+            },
+            {
+              "disabled": true,
+              "text": "Bootstrap",
+              "value": "bootstrap_theme"
+            },
+            {
+              "disabled": true,
+              "text": "Foundation",
+              "value": "foundation_theme"
+            },
+            {
+              "disabled": true,
+              "text": "ThemeRoller",
+              "value": "themeroller_theme"
+            }
+          ],
+          "title": "Agents / Customer",
+          "transform": "table",
+          "transparent": true,
+          "type": "briangann-datatable-panel"
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": true,
+      "title": "Computers",
       "titleSize": "h2"
     }
   ],
@@ -843,5 +1034,5 @@
   },
   "timezone": "",
   "title": "Statistik",
-  "version": 20
+  "version": 26
 }
