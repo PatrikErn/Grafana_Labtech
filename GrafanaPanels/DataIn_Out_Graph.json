@@ -1,0 +1,186 @@
+{
+  "aliasColors": {},
+  "bars": false,
+  "dashLength": 10,
+  "dashes": false,
+  "datasource": null,
+  "fill": 1,
+  "id": 16,
+  "legend": {
+    "alignAsTable": true,
+    "avg": true,
+    "current": true,
+    "max": false,
+    "min": false,
+    "rightSide": true,
+    "show": true,
+    "sort": null,
+    "sortDesc": null,
+    "total": false,
+    "values": true
+  },
+  "lines": true,
+  "linewidth": 2,
+  "links": [],
+  "nullPointMode": "null as zero",
+  "percentage": false,
+  "pointradius": 1,
+  "points": true,
+  "renderer": "flot",
+  "seriesOverrides": [
+    {
+      "alias": "Brewdog OUT",
+      "transform": "negative-Y"
+    },
+    {
+      "alias": "Becks OUT",
+      "transform": "negative-Y"
+    },
+    {
+      "alias": "Lagunita OUT",
+      "transform": "negative-Y"
+    },
+    {
+      "alias": "Duvel OUT",
+      "transform": "negative-Y"
+    },
+    {
+      "alias": "VEEAM OUT",
+      "transform": "negative-Y"
+    },
+    {
+      "alias": "ObligoWDS OUT",
+      "transform": "negative-Y"
+    },
+    {
+      "alias": "Corona OUT",
+      "transform": "negative-Y"
+    }
+  ],
+  "spaceLength": 10,
+  "span": 6,
+  "stack": false,
+  "steppedLine": false,
+  "targets": [
+    {
+      "alias": "",
+      "format": "time_series",
+      "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Dataout) as value,\r\n  'C1Out' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='1' \r\nORDER BY time_sec ASC",
+      "refId": "A",
+      "hide": false
+    },
+    {
+      "alias": "",
+      "format": "time_series",
+      "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Dataout) as value,\r\n  'C2Out' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='12' \r\nORDER BY time_sec ASC",
+      "refId": "B"
+    },
+    {
+      "alias": "",
+      "format": "time_series",
+      "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Dataout) as value,\r\n  'C3OUT' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='92' \r\nORDER BY time_sec ASC",
+      "refId": "C"
+    },
+    {
+      "alias": "",
+      "format": "time_series",
+      "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Dataout) as value,\r\n  'C4 OUT' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='3' \r\nORDER BY time_sec ASC",
+      "refId": "D"
+    },
+    {
+      "alias": "",
+      "format": "time_series",
+      "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Dataout) as value,\r\n  'C5OUT' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='91' \r\nORDER BY time_sec ASC",
+      "refId": "E"
+    },
+    {
+      "alias": "",
+      "format": "time_series",
+      "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Dataout) as value,\r\n  'C6OUT' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='94' \r\nORDER BY time_sec ASC",
+      "refId": "F"
+    },
+    {
+      "alias": "",
+      "format": "time_series",
+      "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Dataout) as value,\r\n  'C7OUT' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='222' \r\nORDER BY time_sec ASC",
+      "refId": "G"
+    },
+    {
+      "alias": "",
+      "format": "time_series",
+      "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Datain) as value,\r\n  'C1 IN' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='1' \r\nORDER BY time_sec ASC",
+      "refId": "H"
+    },
+    {
+      "alias": "",
+      "format": "time_series",
+      "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Datain) as value,\r\n  'C2 IN' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='12' \r\nORDER BY time_sec ASC",
+      "refId": "I"
+    },
+    {
+      "alias": "",
+      "format": "time_series",
+      "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Datain) as value,\r\n  'C3 IN' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='92' \r\nORDER BY time_sec ASC",
+      "refId": "J"
+    },
+    {
+      "alias": "",
+      "format": "time_series",
+      "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Datain) as value,\r\n  'C4 IN' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='3' \r\nORDER BY time_sec ASC",
+      "refId": "K"
+    },
+    {
+      "alias": "",
+      "format": "time_series",
+      "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Datain) as value,\r\n  'C5 IN' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='91' \r\nORDER BY time_sec ASC",
+      "refId": "L"
+    },
+    {
+      "alias": "",
+      "format": "time_series",
+      "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Datain) as value,\r\n  'C6 IN' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='94' \r\nORDER BY time_sec ASC",
+      "refId": "M"
+    },
+    {
+      "alias": "",
+      "format": "time_series",
+      "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Datain) as value,\r\n  'C7 IN' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='222' \r\nORDER BY time_sec ASC",
+      "refId": "N"
+    }
+  ],
+  "thresholds": [],
+  "timeFrom": null,
+  "timeShift": null,
+  "title": "Obligo Data in / out",
+  "tooltip": {
+    "shared": true,
+    "sort": 1,
+    "value_type": "individual"
+  },
+  "type": "graph",
+  "xaxis": {
+    "buckets": null,
+    "mode": "time",
+    "name": null,
+    "show": true,
+    "values": []
+  },
+  "yaxes": [
+    {
+      "format": "Bps",
+      "label": null,
+      "logBase": 1,
+      "max": null,
+      "min": null,
+      "show": true
+    },
+    {
+      "format": "short",
+      "label": null,
+      "logBase": 1,
+      "max": null,
+      "min": null,
+      "show": false
+    }
+  ]
+}
