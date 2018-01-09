@@ -42,6 +42,12 @@
     },
     {
       "type": "panel",
+      "id": "jdbranham-diagram-panel",
+      "name": "Diagram",
+      "version": "1.4.4"
+    },
+    {
+      "type": "panel",
       "id": "michaeldmoore-multistat-panel",
       "name": "Multistat",
       "version": "1.0.0"
@@ -54,6 +60,12 @@
     },
     {
       "type": "panel",
+      "id": "natel-discrete-panel",
+      "name": "Discrete",
+      "version": "0.0.6"
+    },
+    {
+      "type": "panel",
       "id": "singlestat",
       "name": "Singlestat",
       "version": ""
@@ -62,6 +74,12 @@
       "type": "panel",
       "id": "table",
       "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
       "version": ""
     }
   ],
@@ -538,14 +556,14 @@
             {
               "alias": "",
               "format": "time_series",
-              "hide": false,
+              "hide": true,
               "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (Datain) as value,\r\n  'Brewdog DataIn' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate)  and ComputerID='1' \r\nORDER BY time_sec ASC",
               "refId": "A"
             },
             {
               "alias": "",
               "format": "time_series",
-              "hide": false,
+              "hide": true,
               "rawSql": "SELECT\r\ncomputerid,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (DataOut) as value,\r\n  'Brewdog DataOut' as metric\r\nFROM h_computerstatshourly \r\nWHERE $__timeFilter(LastUpdate) and ComputerID='1'\r\nORDER BY time_sec ASC",
               "refId": "B"
             },
@@ -969,7 +987,7 @@
       "repeatIteration": null,
       "repeatRowId": null,
       "showTitle": true,
-      "title": "PieCharts",
+      "title": "PieCharts - MIxed",
       "titleSize": "h6"
     },
     {
@@ -1006,7 +1024,7 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "span": 4,
+          "span": 3,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1083,7 +1101,7 @@
           "maxDataPoints": 3,
           "nullPointMode": "connected",
           "pieType": "donut",
-          "span": 4,
+          "span": 9,
           "strokeWidth": 1,
           "targets": [
             {
@@ -1096,79 +1114,6 @@
           "title": "PieChart-Reliability -Locations - Monitor",
           "type": "grafana-piechart-panel",
           "valueName": "current"
-        },
-        {
-          "columns": [],
-          "datasource": "${DS_LABTECH}",
-          "description": "Blue = Informational\nYellow= Warning\nRed = Error",
-          "fontSize": "130%",
-          "height": "210",
-          "id": 67,
-          "links": [],
-          "pageSize": 10,
-          "repeat": null,
-          "scroll": true,
-          "showHeader": true,
-          "sort": {
-            "col": 0,
-            "desc": true
-          },
-          "span": 4,
-          "styles": [
-            {
-              "alias": "Varning",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "VALUE",
-              "type": "string"
-            },
-            {
-              "alias": "",
-              "colorMode": "cell",
-              "colors": [
-                "rgba(45, 45, 204, 0.9)",
-                "rgba(194, 197, 33, 0.89)",
-                "rgba(183, 44, 44, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Severity",
-              "preserveFormat": true,
-              "thresholds": [
-                "2.00",
-                "4.00"
-              ],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "MMMM D, YYYY LT",
-              "decimals": 2,
-              "pattern": "Date",
-              "thresholds": [],
-              "type": "date",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "alias": "",
-              "format": "table",
-              "hide": false,
-              "rawSql": "SELECT Severity, \r\nSource AS VALUE ,\r\nAlertdate as 'Date'\r\nFROM `alerts`\r\nWHERE (Alerts.Severity=3  OR Alerts.Severity=2 OR Alerts.Severity=4 )\r\nORDER BY Alertdate DESC LIMIT 30",
-              "refId": "A"
-            }
-          ],
-          "title": "Table -Alerts",
-          "transform": "table",
-          "transparent": false,
-          "type": "table"
         }
       ],
       "repeat": null,
@@ -1180,7 +1125,7 @@
     },
     {
       "collapse": true,
-      "height": 278,
+      "height": 263,
       "panels": [
         {
           "aliasColors": {},
@@ -1205,7 +1150,7 @@
           "minSpan": 3,
           "nullPointMode": "connected",
           "pieType": "pie",
-          "span": 6,
+          "span": 4,
           "strokeWidth": 1,
           "targets": [
             {
@@ -1261,16 +1206,9 @@
           "minSpan": 3,
           "nullPointMode": "connected",
           "pieType": "pie",
-          "span": 6,
+          "span": 4,
           "strokeWidth": "2",
           "targets": [
-            {
-              "alias": "",
-              "format": "time_series",
-              "hide": true,
-              "rawSql": "SELECT\r\n    (UNIX_TIMESTAMP(StartedDate)) and StartedDate is not null as time_sec, \r\n  Count(TicketId) as value,\r\n  'User Submit : Open' as metric \r\nFROM tickets \r\nWHERE (UNIX_TIMESTAMP(StartedDate)) and STATUS= 2 And Priority= 10 \r\nORDER BY metric , time_sec ASC",
-              "refId": "A"
-            },
             {
               "alias": "",
               "format": "time_series",
@@ -1295,284 +1233,6 @@
       "repeatRowId": null,
       "showTitle": true,
       "title": "PieChart - Inventory",
-      "titleSize": "h6"
-    },
-    {
-      "collapse": true,
-      "height": 191,
-      "panels": [
-        {
-          "aliasColors": {},
-          "cacheTimeout": null,
-          "combine": {
-            "label": "Others",
-            "threshold": 0
-          },
-          "datasource": "${DS_LABTECH}",
-          "description": "All devices on a customer\nDynamic - Need a template",
-          "fontSize": "80%",
-          "format": "short",
-          "id": 28,
-          "interval": null,
-          "legend": {
-            "percentage": true,
-            "show": true,
-            "values": true
-          },
-          "legendType": "Right side",
-          "links": [],
-          "maxDataPoints": 3,
-          "minSpan": null,
-          "nullPointMode": "connected",
-          "pieType": "pie",
-          "repeat": "clients",
-          "span": 12,
-          "strokeWidth": 1,
-          "targets": [
-            {
-              "alias": "",
-              "format": "time_series",
-              "hide": false,
-              "rawSql": "SELECT\r\nclients.name ,\r\n  (UNIX_TIMESTAMP(PCDate)) and PCDate is not null as time_sec,\r\n  Count(*) as value,\r\n  $clients' Servers' as metric\r\nFROM computers \r\nLEFT OUTER JOIN clients ON clients.clientid=computers.clientid\r\nLEFT OUTER JOIN locations ON locations.locationid=computers.locationid\r\nWHERE (UNIX_TIMESTAMP(PCDate)) AND computers.clientid=clients.clientid AND `OS` LIKE '%server%' AND clients.name = $clients",
-              "refId": "A"
-            },
-            {
-              "alias": "",
-              "format": "time_series",
-              "hide": false,
-              "rawSql": "SELECT\r\nclients.name ,\r\n  (UNIX_TIMESTAMP(PCDate)) and PCDate is not null as time_sec,\r\n    Count(*) as value,\r\n    $clients'  Workstation' as metric\r\nFROM computers \r\n    LEFT OUTER JOIN clients ON clients.clientid=computers.clientid\r\n    LEFT OUTER JOIN locations ON locations.locationid=computers.locationid\r\n  WHERE (UNIX_TIMESTAMP(PCDate)) AND computers.clientid=clients.clientid AND `OS` NOT LIKE '%server%' AND clients.name = $clients",
-              "refId": "B"
-            },
-            {
-              "alias": "",
-              "format": "time_series",
-              "hide": false,
-              "rawSql": "SELECT\nclientname,\n  UNIX_TIMESTAMP(DeviceDateLastContact) and DeviceDateLastContact is not null as time_sec,\n  Count(DeviceStatus=1) as value,\n  $clients'  Network Devices' as metric\nFROM v_xr_networkdevices \nWHERE UNIX_TIMESTAMP(DeviceDateLastContact) and clientname = $clients \nORDER BY time_sec ASC\n",
-              "refId": "D"
-            }
-          ],
-          "title": "Pie-Chart / Devices / Clients_Template",
-          "type": "grafana-piechart-panel",
-          "valueName": "current"
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_LABTECH}",
-          "decimals": null,
-          "fill": 1,
-          "hideTimeOverride": false,
-          "id": 23,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "hideEmpty": true,
-            "hideZero": true,
-            "max": true,
-            "min": true,
-            "rightSide": true,
-            "show": true,
-            "sort": "max",
-            "sortDesc": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null as zero",
-          "percentage": false,
-          "pointradius": 1,
-          "points": true,
-          "renderer": "flot",
-          "repeat": "server",
-          "seriesOverrides": [
-            {
-              "alias": "CPU",
-              "color": "#65C5DB",
-              "legend": true
-            }
-          ],
-          "spaceLength": 10,
-          "span": 12,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "",
-              "format": "time_series",
-              "hide": true,
-              "rawSql": "SELECT\r\ncomputers.name,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (cpu) as value,\r\n  computers.name as metric\r\nFROM h_computerstatshourly \r\nINNER JOIN computers ON h_computerstatshourly.computerid\r\nWHERE $__timeFilter(LastUpdate) and CPU Between 0 and 100 and LastUpdate > DATE_ADD(NOW(),INTERVAL -7 DAY) and computers.name = $server\r\nORDER BY time_sec ASC",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [
-            {
-              "colorMode": "ok",
-              "fill": true,
-              "line": false,
-              "op": "lt",
-              "value": 95
-            },
-            {
-              "colorMode": "critical",
-              "fill": true,
-              "line": false,
-              "op": "gt",
-              "value": 95
-            }
-          ],
-          "timeFrom": "30m",
-          "timeShift": null,
-          "title": "CPU _Template",
-          "tooltip": {
-            "shared": true,
-            "sort": 1,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "percent",
-              "label": "Max Load",
-              "logBase": 1,
-              "max": "110",
-              "min": "0",
-              "show": true
-            },
-            {
-              "decimals": null,
-              "format": "percent",
-              "label": "",
-              "logBase": 1,
-              "max": "110",
-              "min": "0",
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_LABTECH}",
-          "decimals": null,
-          "fill": 1,
-          "hideTimeOverride": false,
-          "id": 24,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "hideEmpty": true,
-            "hideZero": true,
-            "max": true,
-            "min": true,
-            "rightSide": true,
-            "show": true,
-            "sort": "max",
-            "sortDesc": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null as zero",
-          "percentage": false,
-          "pointradius": 1,
-          "points": true,
-          "renderer": "flot",
-          "repeat": "server",
-          "seriesOverrides": [
-            {
-              "alias": "CPU",
-              "color": "#65C5DB",
-              "legend": true
-            }
-          ],
-          "spaceLength": 10,
-          "span": 12,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "",
-              "format": "time_series",
-              "hide": true,
-              "rawSql": "SELECT\r\ncomputers.name,\r\n (UNIX_TIMESTAMP(LastUpdate)) as  time_sec ,\r\n  (MEM) as value,\r\n  $server as metric\r\nFROM h_computerstatshourly \r\nINNER JOIN computers ON h_computerstatshourly.computerid \r\nWHERE $__timeFilter(LastUpdate)  and LastUpdate > DATE_ADD(NOW(),INTERVAL -24 Hour) and computers.name = $server\r\nORDER BY time_sec ASC",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [
-            {
-              "colorMode": "ok",
-              "fill": true,
-              "line": false,
-              "op": "lt",
-              "value": 95
-            },
-            {
-              "colorMode": "critical",
-              "fill": true,
-              "line": false,
-              "op": "gt",
-              "value": 95
-            }
-          ],
-          "timeFrom": "30m",
-          "timeShift": null,
-          "title": "MEMORY _Template",
-          "tooltip": {
-            "shared": true,
-            "sort": 1,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "percent",
-              "label": "Max Load",
-              "logBase": 1,
-              "max": "110",
-              "min": "0",
-              "show": true
-            },
-            {
-              "decimals": null,
-              "format": "percent",
-              "label": "",
-              "logBase": 1,
-              "max": "110",
-              "min": "0",
-              "show": true
-            }
-          ]
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "Mixed_Templates",
       "titleSize": "h6"
     },
     {
@@ -1833,7 +1493,7 @@
     },
     {
       "collapse": true,
-      "height": 414,
+      "height": null,
       "panels": [
         {
           "columns": [],
@@ -1841,14 +1501,14 @@
           "fontSize": "100%",
           "id": 39,
           "links": [],
-          "pageSize": null,
-          "scroll": true,
+          "pageSize": 5,
+          "scroll": false,
           "showHeader": true,
           "sort": {
             "col": 2,
             "desc": true
           },
-          "span": 6,
+          "span": 2,
           "styles": [
             {
               "alias": "",
@@ -1957,12 +1617,336 @@
             {
               "alias": "",
               "format": "table",
-              "hide": true,
+              "hide": false,
               "rawSql": "SELECT `TargetId`,\r\n`Name`,\r\n`OverallScore`,\r\n`PerformanceScore`,\r\n`StabilityScore`,\r\n`SecurityScore`\r\n\r\nFROM plugin_sap_summarydata WHERE TargetType = 2 and OverallScore >0",
               "refId": "A"
             }
           ],
           "title": "Standards and Health Scores",
+          "transform": "table",
+          "type": "table"
+        },
+        {
+          "columns": [],
+          "compactRowsEnabled": false,
+          "datasource": "${DS_LABTECH}",
+          "datatablePagingType": "simple_numbers",
+          "datatableTheme": "basic_theme",
+          "emptyData": false,
+          "fontSize": "110%",
+          "hoverEnabled": false,
+          "id": 45,
+          "infoEnabled": true,
+          "lengthChangeEnabled": true,
+          "links": [],
+          "orderColumnEnabled": true,
+          "pagingTypes": [
+            {
+              "text": "Page number buttons only",
+              "value": "numbers"
+            },
+            {
+              "text": "'Previous' and 'Next' buttons only",
+              "value": "simple"
+            },
+            {
+              "text": "'Previous' and 'Next' buttons, plus page numbers",
+              "value": "simple_numbers"
+            },
+            {
+              "text": "'First', 'Previous', 'Next' and 'Last' buttons",
+              "value": "full"
+            },
+            {
+              "text": "'First', 'Previous', 'Next' and 'Last' buttons, plus page numbers",
+              "value": "full_numbers"
+            },
+            {
+              "text": "'First' and 'Last' buttons, plus page numbers",
+              "value": "first_last_numbers"
+            }
+          ],
+          "panelHeight": null,
+          "rowNumbersEnabled": false,
+          "rowsPerPage": 5,
+          "scroll": false,
+          "scrollHeight": "default",
+          "searchEnabled": false,
+          "showCellBorders": false,
+          "showHeader": true,
+          "showRowBorders": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "span": 2,
+          "stripedRowsEnabled": true,
+          "styles": [
+            {
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Kund",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "colorMode": "row",
+              "colors": [
+                "rgba(45, 55, 172, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 0,
+              "pattern": "Workstation",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "alias": "",
+              "format": "table",
+              "hide": false,
+              "rawSql": "SELECT \r\nclients.name AS 'Client',\r\n       COUNT(computers.computerid) AS 'Workstation'\r\n       FROM computers\r\nLEFT OUTER JOIN clients ON clients.clientid=computers.clientid\r\nLEFT OUTER JOIN locations ON locations.locationid=computers.locationid\r\nWHERE computers.clientid=clients.clientid AND `OS` NOT LIKE '%server%'\r\nGROUP BY clients.name\r\nOrder by computers.computerid",
+              "refId": "A"
+            }
+          ],
+          "themeOptions": {
+            "dark": "./css/datatable-dark.css",
+            "light": "./css/datatable-light.css"
+          },
+          "themes": [
+            {
+              "disabled": false,
+              "text": "Basic",
+              "value": "basic_theme"
+            },
+            {
+              "disabled": true,
+              "text": "Bootstrap",
+              "value": "bootstrap_theme"
+            },
+            {
+              "disabled": true,
+              "text": "Foundation",
+              "value": "foundation_theme"
+            },
+            {
+              "disabled": true,
+              "text": "ThemeRoller",
+              "value": "themeroller_theme"
+            }
+          ],
+          "title": "Workstations per Client",
+          "transform": "table",
+          "type": "briangann-datatable-panel"
+        },
+        {
+          "columns": [],
+          "datasource": "${DS_LABTECH}",
+          "fontSize": "100%",
+          "id": 73,
+          "links": [],
+          "pageSize": 10,
+          "scroll": false,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "span": 7,
+          "styles": [
+            {
+              "alias": "",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "Computer",
+              "type": "string"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "Monitorname",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Monitorstatus",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "MMMM D, YYYY LT",
+              "decimals": 2,
+              "pattern": "MonitorLastFailDate",
+              "thresholds": [],
+              "type": "date",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "alias": "",
+              "format": "table",
+              "rawSql": "SELECT \r\nComputers.name as Computer,\r\nMonitorname ,\r\nMonitorstatus ,\r\nMonitorLastFailDate\r\nFROM \r\nv_xr_Computermonitors\r\nLEFT JOIN Computers ON v_xr_Computermonitors.computerID=Computers.computerid\r\nWHERE MonitorAlertActionTitle='#Create Zendesk Ticket and Raise Alert' AND MonitorStatus='Failed'  AND MonitorCheckAction='Service'\r\nORDER BY monitorname",
+              "refId": "A"
+            },
+            {
+              "alias": "",
+              "format": "table",
+              "hide": true,
+              "rawSql": "SELECT \r\nmonitorname as  value,\r\nUNIX_TIMESTAMP(MonitorNextScan) AND IFNULL(MonitorNextScan, 0) AS time_sec,\r\nMonitorstatus  as metric\r\nFROM \r\nv_xr_Computermonitors\r\nWhere $__timeFilter(MonitorNextScan) and MonitorAlertActionTitle='#Create Zendesk Ticket and Raise Alert' and MonitorStatus='Failed'  and MonitorCheckAction='Service'\r\nOrder by value",
+              "refId": "B"
+            }
+          ],
+          "title": "Table_Detail Services Down",
+          "transform": "table",
+          "type": "table"
+        },
+        {
+          "columns": [],
+          "datasource": "${DS_LABTECH}",
+          "description": "Blue = Informational\nYellow= Warning\nRed = Error",
+          "fontSize": "130%",
+          "height": "210",
+          "id": 67,
+          "links": [],
+          "pageSize": 10,
+          "repeat": null,
+          "scroll": false,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "span": 1,
+          "styles": [
+            {
+              "alias": "Varning",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "VALUE",
+              "type": "string"
+            },
+            {
+              "alias": "",
+              "colorMode": "cell",
+              "colors": [
+                "rgba(45, 45, 204, 0.9)",
+                "rgba(194, 197, 33, 0.89)",
+                "rgba(183, 44, 44, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Severity",
+              "preserveFormat": true,
+              "thresholds": [
+                "2.00",
+                "4.00"
+              ],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "MMMM D, YYYY LT",
+              "decimals": 2,
+              "pattern": "Date",
+              "thresholds": [],
+              "type": "date",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "alias": "",
+              "format": "table",
+              "hide": false,
+              "rawSql": "SELECT Severity, \r\nSource AS VALUE ,\r\nAlertdate as 'Date'\r\nFROM `alerts`\r\nWHERE (Alerts.Severity=3  OR Alerts.Severity=2 OR Alerts.Severity=4 )\r\nORDER BY Alertdate DESC LIMIT 30",
+              "refId": "A"
+            }
+          ],
+          "title": "Table -Alerts",
+          "transform": "table",
+          "transparent": false,
+          "type": "table"
+        },
+        {
+          "columns": [],
+          "datasource": "${DS_LABTECH}",
+          "fontSize": "100%",
+          "id": 60,
+          "links": [],
+          "pageSize": 5,
+          "scroll": false,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "span": 5,
+          "styles": [
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 0,
+              "pattern": "Antal",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "alias": "",
+              "format": "table",
+              "rawSql": "SELECT \r\nCOUNT(*) as Found,\r\ninv_operatingsystem.name AS 'OS Version'\r\nFROM Computers \r\nLEFT JOIN inv_operatingsystem ON (Computers.ComputerId=inv_operatingsystem.ComputerId)\r\nLEFT JOIN Clients ON (Computers.ClientId=Clients.ClientId)\r\nLEFT JOIN Locations ON (Computers.LocationId=Locations.LocationID)\r\n WHERE \r\n((INSTR(inv_operatingsystem.name,'Windows ') > 0))\r\nGROUP BY OS\r\n",
+              "refId": "A"
+            }
+          ],
+          "title": "OS Found",
           "transform": "table",
           "type": "table"
         },
@@ -1979,7 +1963,7 @@
             "col": 0,
             "desc": true
           },
-          "span": 6,
+          "span": 3,
           "styles": [
             {
               "alias": "",
@@ -2112,17 +2096,23 @@
           "columns": [],
           "datasource": "${DS_LABTECH}",
           "fontSize": "100%",
-          "id": 60,
+          "id": 68,
           "links": [],
-          "pageSize": null,
-          "scroll": true,
+          "pageSize": 5,
+          "scroll": false,
           "showHeader": true,
           "sort": {
             "col": 0,
             "desc": true
           },
-          "span": 2,
+          "span": 3,
           "styles": [
+            {
+              "alias": "Time",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "Time",
+              "type": "date"
+            },
             {
               "alias": "",
               "colorMode": null,
@@ -2131,8 +2121,8 @@
                 "rgba(237, 129, 40, 0.89)",
                 "rgba(50, 172, 45, 0.97)"
               ],
-              "decimals": 0,
-              "pattern": "Antal",
+              "decimals": 2,
+              "pattern": "/.*/",
               "thresholds": [],
               "type": "number",
               "unit": "short"
@@ -2142,13 +2132,137 @@
             {
               "alias": "",
               "format": "table",
-              "rawSql": "SELECT \r\nCOUNT(*) as Found,\r\ninv_operatingsystem.name AS 'OS Version'\r\nFROM Computers \r\nLEFT JOIN inv_operatingsystem ON (Computers.ComputerId=inv_operatingsystem.ComputerId)\r\nLEFT JOIN Clients ON (Computers.ClientId=Clients.ClientId)\r\nLEFT JOIN Locations ON (Computers.LocationId=Locations.LocationID)\r\n WHERE \r\n((INSTR(inv_operatingsystem.name,'Windows ') > 0))\r\nGROUP BY OS\r\n",
+              "rawSql": "SELECT \r\nSoftware.Version,\r\ncomputers.name as 'Computer Name',\r\nCOUNT(*),  \r\n   Software.Name AS 'Application'\r\nFROM Computers\r\nLEFT JOIN inv_operatingsystem ON (Computers.ComputerId=inv_operatingsystem.ComputerId)\r\nLEFT JOIN Clients ON (Computers.ClientId=Clients.ClientId)\r\nLEFT JOIN Locations ON (Computers.LocationId=Locations.LocationID)\r\nLEFT JOIN Software ON (Software.ComputerId = Computers.ComputerId)\r\n WHERE \r\n((Software.Name LIKE '%torrent%'))\r\nGROUP BY Software.name",
               "refId": "A"
             }
           ],
-          "title": "OS Found",
+          "title": "Panel Title",
           "transform": "table",
           "type": "table"
+        },
+        {
+          "columns": [],
+          "compactRowsEnabled": false,
+          "datasource": "${DS_LABTECH}",
+          "datatablePagingType": "simple_numbers",
+          "datatableTheme": "basic_theme",
+          "emptyData": false,
+          "fontSize": "100%",
+          "hoverEnabled": false,
+          "id": 44,
+          "infoEnabled": false,
+          "lengthChangeEnabled": false,
+          "links": [],
+          "orderColumnEnabled": false,
+          "pagingTypes": [
+            {
+              "text": "Page number buttons only",
+              "value": "numbers"
+            },
+            {
+              "text": "'Previous' and 'Next' buttons only",
+              "value": "simple"
+            },
+            {
+              "text": "'Previous' and 'Next' buttons, plus page numbers",
+              "value": "simple_numbers"
+            },
+            {
+              "text": "'First', 'Previous', 'Next' and 'Last' buttons",
+              "value": "full"
+            },
+            {
+              "text": "'First', 'Previous', 'Next' and 'Last' buttons, plus page numbers",
+              "value": "full_numbers"
+            },
+            {
+              "text": "'First' and 'Last' buttons, plus page numbers",
+              "value": "first_last_numbers"
+            }
+          ],
+          "panelHeight": null,
+          "rowNumbersEnabled": false,
+          "rowsPerPage": 5,
+          "scroll": false,
+          "scrollHeight": "default",
+          "searchEnabled": false,
+          "showCellBorders": false,
+          "showHeader": true,
+          "showRowBorders": false,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "span": 3,
+          "stripedRowsEnabled": false,
+          "styles": [
+            {
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Kund",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "colorMode": "row",
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 0,
+              "pattern": "Server",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "alias": "",
+              "format": "table",
+              "hide": false,
+              "rawSql": "SELECT \r\nclients.name AS 'Client',\r\n       COUNT(computers.computerid) AS 'Server'\r\n       FROM computers\r\nLEFT OUTER JOIN clients ON clients.clientid=computers.clientid\r\nLEFT OUTER JOIN locations ON locations.locationid=computers.locationid\r\nWHERE computers.clientid=clients.clientid AND `OS` LIKE '%server%'\r\nGROUP BY clients.name\r\nOrder by 'Server' desc\r\n\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "themeOptions": {
+            "dark": "./css/datatable-dark.css",
+            "light": "./css/datatable-light.css"
+          },
+          "themes": [
+            {
+              "disabled": false,
+              "text": "Basic",
+              "value": "basic_theme"
+            },
+            {
+              "disabled": true,
+              "text": "Bootstrap",
+              "value": "bootstrap_theme"
+            },
+            {
+              "disabled": true,
+              "text": "Foundation",
+              "value": "foundation_theme"
+            },
+            {
+              "disabled": true,
+              "text": "ThemeRoller",
+              "value": "themeroller_theme"
+            }
+          ],
+          "title": "Servers per client",
+          "transform": "table",
+          "type": "briangann-datatable-panel"
         },
         {
           "columns": [],
@@ -2163,7 +2277,7 @@
             "col": 2,
             "desc": true
           },
-          "span": 4,
+          "span": 3,
           "styles": [
             {
               "alias": "Time",
@@ -2202,19 +2316,19 @@
           "columns": [],
           "datasource": "${DS_LABTECH}",
           "description": "Green = < 8 GB\nOrange = < 4 GB\nRed = < 2 GB",
-          "fontSize": "130%",
-          "height": "420",
+          "fontSize": "100%",
+          "height": "",
           "id": 66,
           "links": [],
           "minSpan": null,
-          "pageSize": null,
+          "pageSize": 5,
           "scroll": false,
           "showHeader": true,
           "sort": {
             "col": 6,
             "desc": false
           },
-          "span": 6,
+          "span": 3,
           "styles": [
             {
               "alias": "Time",
@@ -2379,255 +2493,83 @@
     },
     {
       "collapse": true,
-      "height": 84,
+      "height": null,
       "panels": [
         {
-          "columns": [],
-          "compactRowsEnabled": false,
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(196, 159, 11, 0.89)",
+            "rgba(70, 172, 45, 0.97)"
+          ],
           "datasource": "${DS_LABTECH}",
-          "datatablePagingType": "simple_numbers",
-          "datatableTheme": "basic_theme",
-          "emptyData": true,
-          "fontSize": "110%",
-          "hoverEnabled": false,
-          "id": 45,
-          "infoEnabled": true,
-          "lengthChangeEnabled": true,
+          "decimals": null,
+          "format": "percent",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 41,
+          "interval": null,
           "links": [],
-          "orderColumnEnabled": true,
-          "pagingTypes": [
+          "mappingType": 1,
+          "mappingTypes": [
             {
-              "text": "Page number buttons only",
-              "value": "numbers"
+              "name": "value to text",
+              "value": 1
             },
             {
-              "text": "'Previous' and 'Next' buttons only",
-              "value": "simple"
-            },
-            {
-              "text": "'Previous' and 'Next' buttons, plus page numbers",
-              "value": "simple_numbers"
-            },
-            {
-              "text": "'First', 'Previous', 'Next' and 'Last' buttons",
-              "value": "full"
-            },
-            {
-              "text": "'First', 'Previous', 'Next' and 'Last' buttons, plus page numbers",
-              "value": "full_numbers"
-            },
-            {
-              "text": "'First' and 'Last' buttons, plus page numbers",
-              "value": "first_last_numbers"
+              "name": "range to text",
+              "value": 2
             }
           ],
-          "panelHeight": 250,
-          "rowNumbersEnabled": false,
-          "rowsPerPage": 5,
-          "scroll": true,
-          "scrollHeight": "default",
-          "searchEnabled": false,
-          "showCellBorders": false,
-          "showHeader": true,
-          "showRowBorders": true,
-          "sort": {
-            "col": 0,
-            "desc": true
-          },
-          "span": 4,
-          "stripedRowsEnabled": true,
-          "styles": [
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "Disk Health",
+          "prefixFontSize": "80%",
+          "rangeMaps": [
             {
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Kund",
-              "thresholds": [],
-              "type": "string",
-              "unit": "short"
-            },
-            {
-              "colorMode": "row",
-              "colors": [
-                "rgba(45, 55, 172, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Workstation",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
             }
           ],
-          "targets": [
-            {
-              "alias": "",
-              "format": "table",
-              "hide": true,
-              "rawSql": "SELECT \r\nclients.name AS 'Client',\r\n       COUNT(computers.computerid) AS 'Workstation'\r\n       FROM computers\r\nLEFT OUTER JOIN clients ON clients.clientid=computers.clientid\r\nLEFT OUTER JOIN locations ON locations.locationid=computers.locationid\r\nWHERE computers.clientid=clients.clientid AND `OS` NOT LIKE '%server%'\r\nGROUP BY clients.name\r\nOrder by computers.computerid",
-              "refId": "A"
-            }
-          ],
-          "themeOptions": {
-            "dark": "./css/datatable-dark.css",
-            "light": "./css/datatable-light.css"
-          },
-          "themes": [
-            {
-              "disabled": false,
-              "text": "Basic",
-              "value": "basic_theme"
-            },
-            {
-              "disabled": true,
-              "text": "Bootstrap",
-              "value": "bootstrap_theme"
-            },
-            {
-              "disabled": true,
-              "text": "Foundation",
-              "value": "foundation_theme"
-            },
-            {
-              "disabled": true,
-              "text": "ThemeRoller",
-              "value": "themeroller_theme"
-            }
-          ],
-          "title": "Workstations per Client",
-          "transform": "table",
-          "type": "briangann-datatable-panel"
-        },
-        {
-          "columns": [],
-          "compactRowsEnabled": false,
-          "datasource": "${DS_LABTECH}",
-          "datatablePagingType": "simple_numbers",
-          "datatableTheme": "basic_theme",
-          "emptyData": true,
-          "fontSize": "100%",
-          "hoverEnabled": true,
-          "id": 44,
-          "infoEnabled": true,
-          "lengthChangeEnabled": true,
-          "links": [],
-          "orderColumnEnabled": true,
-          "pagingTypes": [
-            {
-              "text": "Page number buttons only",
-              "value": "numbers"
-            },
-            {
-              "text": "'Previous' and 'Next' buttons only",
-              "value": "simple"
-            },
-            {
-              "text": "'Previous' and 'Next' buttons, plus page numbers",
-              "value": "simple_numbers"
-            },
-            {
-              "text": "'First', 'Previous', 'Next' and 'Last' buttons",
-              "value": "full"
-            },
-            {
-              "text": "'First', 'Previous', 'Next' and 'Last' buttons, plus page numbers",
-              "value": "full_numbers"
-            },
-            {
-              "text": "'First' and 'Last' buttons, plus page numbers",
-              "value": "first_last_numbers"
-            }
-          ],
-          "panelHeight": 250,
-          "rowNumbersEnabled": false,
-          "rowsPerPage": 5,
-          "scroll": true,
-          "scrollHeight": "default",
-          "searchEnabled": false,
-          "showCellBorders": true,
-          "showHeader": true,
-          "showRowBorders": false,
-          "sort": {
-            "col": 0,
-            "desc": true
-          },
           "span": 3,
-          "stripedRowsEnabled": true,
-          "styles": [
-            {
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Kund",
-              "thresholds": [],
-              "type": "string",
-              "unit": "short"
-            },
-            {
-              "colorMode": "row",
-              "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Server",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "value",
           "targets": [
             {
               "alias": "",
               "format": "table",
-              "hide": true,
-              "rawSql": "SELECT \r\nclients.name AS 'Client',\r\n       COUNT(computers.computerid) AS 'Server'\r\n       FROM computers\r\nLEFT OUTER JOIN clients ON clients.clientid=computers.clientid\r\nLEFT OUTER JOIN locations ON locations.locationid=computers.locationid\r\nWHERE computers.clientid=clients.clientid AND `OS` LIKE '%server%'\r\nGROUP BY clients.name\r\nOrder by 'Server' desc\r\n\r\n\r\n",
+              "rawSql": "SELECT ROUND(AVG(TargetWeightedScore)) AS `value` \nFROM v_xr_sap_clienthealthchecks \nWHERE clientid=(1 OR 1=0) AND (Checkname LIKE 'Drive Fragmentation' OR Checkname LIKE 'Drive Stability' OR Checkname LIKE 'Drive Performance')",
               "refId": "A"
             }
           ],
-          "themeOptions": {
-            "dark": "./css/datatable-dark.css",
-            "light": "./css/datatable-light.css"
-          },
-          "themes": [
+          "thresholds": "50,75",
+          "title": "Average Disc Health ||Performance - Fragmentation - Stability",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
             {
-              "disabled": false,
-              "text": "Basic",
-              "value": "basic_theme"
-            },
-            {
-              "disabled": true,
-              "text": "Bootstrap",
-              "value": "bootstrap_theme"
-            },
-            {
-              "disabled": true,
-              "text": "Foundation",
-              "value": "foundation_theme"
-            },
-            {
-              "disabled": true,
-              "text": "ThemeRoller",
-              "value": "themeroller_theme"
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
             }
           ],
-          "title": "Servers per client",
-          "transform": "table",
-          "type": "briangann-datatable-panel"
+          "valueName": "avg"
         },
         {
           "cacheTimeout": null,
@@ -2676,7 +2618,7 @@
               "to": "null"
             }
           ],
-          "span": 2,
+          "span": 3,
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
@@ -2738,7 +2680,7 @@
             }
           ],
           "maxDataPoints": 100,
-          "minSpan": 1,
+          "minSpan": null,
           "nullPointMode": "connected",
           "nullText": null,
           "postfix": "",
@@ -2769,7 +2711,7 @@
             }
           ],
           "thresholds": "90,50",
-          "title": "Overall Patch Compliance",
+          "title": "",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -2786,13 +2728,12 @@
           "colorBackground": true,
           "colorValue": false,
           "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(196, 159, 11, 0.89)",
-            "rgba(70, 172, 45, 0.97)"
+            "#299c46",
+            "#508642",
+            "#d44a3a"
           ],
           "datasource": "${DS_LABTECH}",
-          "decimals": null,
-          "format": "percent",
+          "format": "none",
           "gauge": {
             "maxValue": 100,
             "minValue": 0,
@@ -2800,7 +2741,7 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
-          "id": 41,
+          "id": 69,
           "interval": null,
           "links": [],
           "mappingType": 1,
@@ -2819,8 +2760,8 @@
           "nullText": null,
           "postfix": "",
           "postfixFontSize": "50%",
-          "prefix": "Disk Health",
-          "prefixFontSize": "80%",
+          "prefix": "",
+          "prefixFontSize": "50%",
           "rangeMaps": [
             {
               "from": "null",
@@ -2828,24 +2769,24 @@
               "to": "null"
             }
           ],
-          "span": 2,
+          "span": 3,
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
             "lineColor": "rgb(31, 120, 193)",
             "show": false
           },
-          "tableColumn": "value",
+          "tableColumn": "New Computers last 30 days",
           "targets": [
             {
               "alias": "",
               "format": "table",
-              "rawSql": "SELECT ROUND(AVG(TargetWeightedScore)) AS `value` \nFROM v_xr_sap_clienthealthchecks \nWHERE clientid=(1 OR 1=0) AND (Checkname LIKE 'Drive Fragmentation' OR Checkname LIKE 'Drive Stability' OR Checkname LIKE 'Drive Performance')",
+              "rawSql": "SELECT \r\n  COUNT(computers.name) AS 'New Computers last 30 days'  \r\n   \r\nFROM Computers \r\nLEFT JOIN inv_operatingsystem ON (Computers.ComputerId=inv_operatingsystem.ComputerId)\r\nLEFT JOIN Clients ON (Computers.ClientId=Clients.ClientId)\r\nLEFT JOIN Locations ON (Computers.LocationId=Locations.LocationID)\r\n WHERE \r\n((DATEDIFF(NOW(), Computers.DateAdded) < 30))\r\n",
               "refId": "A"
             }
           ],
-          "thresholds": "50,75",
-          "title": "Average Disc Health ||Performance - Fragmentation - Stability",
+          "thresholds": "",
+          "title": "New devices last 30 days",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -2867,16 +2808,17 @@
     },
     {
       "collapse": true,
-      "height": 357,
+      "height": 351,
       "panels": [
         {
           "aliasColors": {},
-          "bars": true,
+          "bars": false,
           "dashLength": 10,
           "dashes": false,
           "datasource": "${DS_LABTECH}",
           "decimals": 2,
           "fill": 1,
+          "hideTimeOverride": true,
           "id": 38,
           "legend": {
             "alignAsTable": true,
@@ -2891,7 +2833,7 @@
             "total": false,
             "values": true
           },
-          "lines": false,
+          "lines": true,
           "linewidth": 1,
           "links": [],
           "nullPointMode": "connected",
@@ -2930,7 +2872,7 @@
             }
           ],
           "spaceLength": 10,
-          "span": 3,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2938,28 +2880,26 @@
               "alias": "",
               "format": "time_series",
               "hide": false,
-              "rawSql": "SELECT\r\nUNIX_TIMESTAMP(LastUpdate) as time_sec ,\r\nStorageName as metric,\r\nCapacityGB ,\r\nFreeGB as value\r\nFROM plugin_vm_esxdatastorage\r\nWHERE $__timeFilter(LastUpdate) and LastUpdate > DATE_ADD(NOW(),INTERVAL -7 DAY) \r\nGroup BY metric ",
+              "rawSql": "SELECT\r\nUNIX_TIMESTAMP(StorageLastUpdate) as time_sec ,\r\nStorageName as metric,\r\nFreeGB as value ,\r\nCapacityGB\r\nFROM plugin_vm_esxdatastorage\r\nWHERE $__timeFilter(StorageLastUpdate) and StorageLastUpdate > DATE_ADD(NOW(),INTERVAL -365 DAY) \r\norder BY time_sec \r\n",
               "refId": "A"
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
+          "timeFrom": "365d",
           "timeShift": null,
           "title": "Free ESXhost Storage",
           "tooltip": {
-            "shared": false,
+            "shared": true,
             "sort": 1,
             "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
             "buckets": null,
-            "mode": "series",
+            "mode": "time",
             "name": null,
             "show": true,
-            "values": [
-              "total"
-            ]
+            "values": []
           },
           "yaxes": [
             {
@@ -2974,7 +2914,7 @@
             {
               "format": "decgbytes",
               "label": null,
-              "logBase": 1,
+              "logBase": 2,
               "max": null,
               "min": null,
               "show": false
@@ -2983,38 +2923,224 @@
         },
         {
           "aliasColors": {},
-          "cacheTimeout": null,
-          "combine": {
-            "label": "Others",
-            "threshold": 0
-          },
+          "bars": true,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "${DS_LABTECH}",
-          "fontSize": "80%",
-          "format": "decgbytes",
-          "id": 58,
-          "interval": null,
+          "fill": 3,
+          "id": 71,
           "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
             "show": true,
+            "total": false,
             "values": true
           },
-          "legendType": "Under graph",
+          "lines": false,
+          "linewidth": 1,
           "links": [],
-          "maxDataPoints": 3,
-          "nullPointMode": "connected",
-          "pieType": "pie",
-          "span": 3,
-          "strokeWidth": 1,
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": true,
           "targets": [
             {
               "alias": "",
               "format": "time_series",
-              "rawSql": "SELECT\r\nUNIX_TIMESTAMP(LastUpdate) as time_sec ,\r\nStorageName as metric,\r\nCapacityGB ,\r\nFreeGB as value\r\nFROM plugin_vm_esxdatastorage\r\nWHERE $__timeFilter(LastUpdate) and LastUpdate > DATE_ADD(NOW(),INTERVAL -7 DAY) \r\nGroup BY metric ",
+              "rawSql": "SELECT\r\nUNIX_TIMESTAMP(StorageLastUpdate) as time_sec ,\r\nStorageName as metric,\r\n(CapacityGB -FreeGB) / CapacityGB *100  as value \r\n\r\nFROM plugin_vm_esxdatastorage\r\nWHERE $__timeFilter(StorageLastUpdate) and StorageLastUpdate > DATE_ADD(NOW(),INTERVAL -365 DAY) \r\n\r\n\r\n",
               "refId": "A"
             }
           ],
-          "title": "ESXHost Free Storage",
-          "type": "grafana-piechart-panel",
-          "valueName": "avg"
+          "thresholds": [],
+          "timeFrom": "365d",
+          "timeShift": null,
+          "title": "Free ESX Storage",
+          "tooltip": {
+            "shared": false,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "series",
+            "name": null,
+            "show": true,
+            "values": [
+              "current"
+            ]
+          },
+          "yaxes": [
+            {
+              "format": "percent",
+              "label": "Använt %",
+              "logBase": 1,
+              "max": "100",
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": true,
+      "title": "Storage - PanelTest",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": true,
+      "height": 250,
+      "panels": [
+        {
+          "content": "Uses the panel from here\nhttps://grafana.com/plugins/jdbranham-diagram-panel",
+          "id": 77,
+          "links": [],
+          "mode": "markdown",
+          "span": 3,
+          "title": "Description",
+          "type": "text"
+        },
+        {
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "composites": [],
+          "content": "graph TB\nESX-Storage1-->Keg2-local\nESX-Storage1-->Keg1-local\n\nESX-Storage2-->CL2_VMFS02\nESX-Storage2-->CL2_VMFS01\nESX-Storage2-->CL2_VMFS03\nESX-Storage3-->LABB_VMFS01\nESX-Storage3-->LABB_VMFS02",
+          "datasource": "${DS_LABTECH}",
+          "decimals": 0,
+          "format": "percent",
+          "graphId": "diagram_72",
+          "hideTimeOverride": true,
+          "id": 72,
+          "init": {
+            "arrowMarkerAbsolute": true,
+            "cloneCssStyles": false,
+            "flowchart": {
+              "htmlLabels": true,
+              "useMaxWidth": true
+            },
+            "gantt": {
+              "barGap": 4,
+              "barHeight": 20,
+              "fontFamily": "\"Open-Sans\", \"sans-serif\"",
+              "fontSize": 11,
+              "gridLineStartPadding": 35,
+              "leftPadding": 75,
+              "numberSectionStyles": 3,
+              "titleTopMargin": 25,
+              "topPadding": 50
+            },
+            "logLevel": 3,
+            "sequenceDiagram": {
+              "actorMargin": 50,
+              "bottomMarginAdj": 1,
+              "boxMargin": 10,
+              "boxTextMargin": 5,
+              "diagramMarginX": 50,
+              "diagramMarginY": 10,
+              "height": 65,
+              "messageMargin": 35,
+              "mirrorActors": true,
+              "noteMargin": 10,
+              "useMaxWidth": true,
+              "width": 150
+            },
+            "startOnLoad": false
+          },
+          "legend": {
+            "avg": false,
+            "current": true,
+            "gradient": {
+              "enabled": true,
+              "show": true
+            },
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false
+          },
+          "links": [],
+          "mappingType": 1,
+          "maxDataPoints": 100,
+          "maxWidth": false,
+          "mermaidServiceUrl": "",
+          "metricCharacterReplacements": [],
+          "mode": "content",
+          "nullPointMode": "connected",
+          "seriesOverrides": [],
+          "span": 9,
+          "targets": [
+            {
+              "alias": "",
+              "format": "time_series",
+              "rawSql": "SELECT\r\nUNIX_TIMESTAMP(StorageLastUpdate) as time_sec ,\r\nStorageName as metric,\r\n(CapacityGB -FreeGB) / CapacityGB *100  as value \r\n\r\nFROM plugin_vm_esxdatastorage\r\nWHERE $__timeFilter(StorageLastUpdate) and StorageLastUpdate > DATE_ADD(NOW(),INTERVAL -365 DAY) \r\n\r\n\r\n",
+              "refId": "A"
+            }
+          ],
+          "thresholds": "50,80,95",
+          "timeFrom": "365d",
+          "title": "ESX Storage Used",
+          "type": "jdbranham-diagram-panel",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current",
+          "valueOptions": [
+            "avg",
+            "min",
+            "max",
+            "total",
+            "current"
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": true,
+      "title": "Diagram -",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": true,
+      "height": 250,
+      "panels": [
+        {
+          "content": "Uses the multistat panel from \nhttps://github.com/michaeldmoore/michaeldmoore-multistat-panel",
+          "id": 75,
+          "links": [],
+          "mode": "markdown",
+          "span": 4,
+          "title": "Description",
+          "type": "text"
         },
         {
           "BarPadding": 20,
@@ -3067,7 +3193,7 @@
           "datasource": "${DS_LABTECH}",
           "id": 61,
           "links": [],
-          "span": 3,
+          "span": 4,
           "targets": [
             {
               "alias": "",
@@ -3130,12 +3256,12 @@
           "datasource": "${DS_LABTECH}",
           "id": 62,
           "links": [],
-          "span": 3,
+          "span": 4,
           "targets": [
             {
               "alias": "",
               "format": "table",
-              "rawSql": "SELECT\r\n(100-mem) AS value,\r\n (UNIX_TIMESTAMP(LastUpdate))  AS  time_sec ,\r\n  name AS metric\r\nFROM h_computerstatshourly \r\nINNER JOIN computers ON h_computerstatshourly.Computerid=computers.computerid\r\nWHERE $__timeFilter(LastUpdate) AND clientid=4 AND os LIKE '%server%' \r\nGROUP BY name ASC\r\n\r\n",
+              "rawSql": "SELECT\r\n(100-mem) AS value,\r\n (UNIX_TIMESTAMP(LastUpdate))  AS  time_sec ,\r\n  name AS metric\r\nFROM h_computerstatshourly \r\nINNER JOIN computers ON h_computerstatshourly.Computerid=computers.computerid\r\nWHERE $__timeFilter(LastUpdate) AND clientid=1 AND os LIKE '%server%' \r\nGROUP BY name ASC\r\n\r\n",
               "refId": "A"
             }
           ],
@@ -3146,8 +3272,99 @@
       "repeat": null,
       "repeatIteration": null,
       "repeatRowId": null,
-      "showTitle": false,
-      "title": "Performance - PanelTest",
+      "showTitle": true,
+      "title": "Multistat",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": true,
+      "height": 241,
+      "panels": [
+        {
+          "content": "Uses the panel from here\nhttps://grafana.com/plugins/natel-discrete-panel",
+          "id": 76,
+          "links": [],
+          "mode": "markdown",
+          "span": 4,
+          "title": "Description",
+          "type": "text"
+        },
+        {
+          "backgroundColor": "#614d93",
+          "colorMaps": [],
+          "datasource": "${DS_LABTECH}",
+          "display": "timeline",
+          "extendLastValue": true,
+          "hideTimeOverride": true,
+          "highlightOnMouseover": false,
+          "id": 74,
+          "legendSortBy": "count",
+          "lineColor": "rgb(12, 11, 11)",
+          "links": [],
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "metricNameColor": "rgb(14, 9, 9)",
+          "rangeMaps": [],
+          "rowHeight": 50,
+          "showDistinctCount": false,
+          "showLegend": true,
+          "showLegendCounts": false,
+          "showLegendNames": true,
+          "showLegendPercent": false,
+          "showLegendTime": false,
+          "showLegendValues": true,
+          "showTransitionCount": false,
+          "span": 8,
+          "targets": [
+            {
+              "alias": "",
+              "format": "time_series",
+              "rawSql": "SELECT \r\nMonitorstatus as metric,\r\ncount(MonitorStatus) as value,\r\nUNIX_TIMESTAMP(MonitorLastFailDate) as time_sec\r\nFROM \r\nv_xr_Computermonitors\r\nWhere $__timeFilter(Monitorlastfaildate) and MonitorStatus='Success'\r\nGroup by metric",
+              "refId": "A"
+            },
+            {
+              "alias": "",
+              "format": "time_series",
+              "rawSql": "SELECT \r\nMonitorstatus as metric,\r\ncount(MonitorStatus) as value,\r\nUNIX_TIMESTAMP(MonitorLastFailDate) as time_sec\r\nFROM \r\nv_xr_Computermonitors\r\nWhere $__timeFilter(Monitorlastfaildate) and MonitorStatus='Data Collection Only'\r\nGroup by metric",
+              "refId": "B"
+            },
+            {
+              "alias": "",
+              "format": "time_series",
+              "rawSql": "SELECT \r\nMonitorstatus as metric  ,\r\ncount(MonitorStatus) as value,\r\nUNIX_TIMESTAMP(MonitorLastFailDate) as time_sec\r\nFROM \r\nv_xr_Computermonitors\r\nWhere $__timeFilter(Monitorlastfaildate) and MonitorStatus='Failed'\r\nGroup by metric",
+              "refId": "C"
+            }
+          ],
+          "textSize": 24,
+          "timeFrom": "24h",
+          "title": "Monitorstatus",
+          "type": "natel-discrete-panel",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueTextColor": "#ea6460",
+          "writeAllValues": false,
+          "writeLastValue": true,
+          "writeMetricNames": true
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": true,
+      "title": "Discrete panel",
       "titleSize": "h6"
     }
   ],
@@ -3155,71 +3372,10 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": [
-      {
-        "allValue": null,
-        "current": {},
-        "datasource": "${DS_LABTECH}",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Server Hosts",
-        "multi": true,
-        "name": "server",
-        "options": [],
-        "query": "SELECT computers.name  FROM  Computers LEFT OUTER JOIN clients ON clients.clientid=computers.clientid LEFT OUTER JOIN locations ON locations.locationid=computers.locationid WHERE computers.clientid=clients.clientid AND `OS` LIKE '%server%'",
-        "refresh": 1,
-        "regex": "",
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {},
-        "datasource": "${DS_LABTECH}",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Kunder",
-        "multi": true,
-        "name": "clients",
-        "options": [],
-        "query": "SELECT  clients.name FROM  clients",
-        "refresh": 2,
-        "regex": "",
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {},
-        "datasource": "${DS_LABTECH}",
-        "hide": 0,
-        "includeAll": false,
-        "label": null,
-        "multi": true,
-        "name": "test",
-        "options": [],
-        "query": "SELECT NAME FROM  Computers WHERE  `OS` LIKE '%server%'",
-        "refresh": 1,
-        "regex": "",
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      }
-    ]
+    "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1y",
     "to": "now"
   },
   "timepicker": {
@@ -3248,6 +3404,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Snippets * Använd ej",
-  "version": 206
+  "title": "Snippets",
+  "version": 229
 }
