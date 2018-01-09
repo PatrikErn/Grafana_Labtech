@@ -1,0 +1,9 @@
+Add as Template for dynamic selectionm of clients.
+No multivalue
+Variable name is Kund
+Label: Whatever you want.
+
+
+Template query
+	SELECT computers.clientid as __value, clients.name as __text FROM computers LEFT JOIN Clients ON (Computers.ClientId=Clients.ClientId) Group by clients.clientid
+
