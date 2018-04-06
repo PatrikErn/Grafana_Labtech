@@ -17,8 +17,8 @@ Statistik: Singlestat panels, with various panels and metrics.
 
 Alerts: Error and warnings, offline LTservice and low disk.
 
-Additions
-2018-04-06
+Additions.
+2018-04-06:
 Added text panel with description on how to integrate an embedded Excel from a sharepoint site.
 Useful for charts. 
 2018-01-19:
