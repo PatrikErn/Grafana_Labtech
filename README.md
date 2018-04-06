@@ -16,6 +16,8 @@ Details: Health Scores and devices that need reboot.
 Statistik: Singlestat panels, with various panels and metrics. 
 
 Alerts: Error and warnings, offline LTservice and low disk.
-
+2018-04-06
+Added text panel with description on how to integrate an embedded Excel from a sharepoint site.
+Useful for charts.
 2018-01-19:
 Added descriptive textpanels in Snippets if there is a panel that needs to be downloaded.
