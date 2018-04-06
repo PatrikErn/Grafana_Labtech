@@ -1,0 +1,14 @@
+{
+  "content": "#How to use: See link https://support.office.com/en-us/article/Share-it-Embed-an-Excel-workbook-on-your-web-page-or-blog-from-OneDrive-804e1845-5662-487e-9b38-f96307144081 on embedding excel.\r\n<style>\r\n   \r\n    #frame { width: 1920px; height: 1080px;  }\r\n    #frame { -ms-zoom: 0.7; -moz-transform: scale(0.7); -moz-transform-origin: 0px 0; -o-transform: scale(0.7); -o-transform-origin: 0 0; -webkit-transform: scale(0.7); -webkit-transform-origin: 0 0; }\r\n</style>\r\n<div id=\"wrap\">\r\n    <iframe id=\"frame\" src=\"Yourembeddedlinkfromofficehere\"></iframe>\r\n</div>",
+  "gridPos": {
+    "h": 28,
+    "w": 24,
+    "x": 0,
+    "y": 1
+  },
+  "id": 110,
+  "links": [],
+  "mode": "html",
+  "title": "Excel",
+  "type": "text"
+}
