@@ -49,7 +49,7 @@
       "transform": "negative-Y"
     },
     {
-      "alias": "ObligoWDS OUT",
+      "alias": "WDS OUT",
       "transform": "negative-Y"
     },
     {
@@ -151,7 +151,7 @@
   "thresholds": [],
   "timeFrom": null,
   "timeShift": null,
-  "title": "Obligo Data in / out",
+  "title": " Data in / out",
   "tooltip": {
     "shared": true,
     "sort": 1,
