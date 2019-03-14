@@ -359,7 +359,7 @@
               "transform": "negative-Y"
             },
             {
-              "alias": "ObligoWDS OUT",
+              "alias": "WDS OUT",
               "transform": "negative-Y"
             },
             {
@@ -466,7 +466,7 @@
               "transform": "negative-Y"
             },
             {
-              "alias": "ObligoWDS OUT",
+              "alias": "WDS OUT",
               "transform": "negative-Y"
             },
             {
